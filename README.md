@@ -10,7 +10,7 @@ Please visit [https://approach0.xyz/demo](https://approach0.xyz/demo) for a WEB 
 ![](https://github.com/approach0/search-engine-docs-eng/raw/master/img/clip.gif)
 
 This branch is saved for reproducing `CIKM-2018` paper results. Sections below describes how to setup,
-index and search NTCIR-12 dataset using Approach0. We also provide tool scripts for evaluation.
+index and search NTCIR-12 dataset using Approach0. This branch also provides some tool scripts for generating TREC format files.
 
 Details on our evaluation results (including query-by-query results) and also the NTCIR-12 dataset (in LaTeX)
 can be viewed here:
@@ -24,7 +24,7 @@ Clone the CIKM-2018 branch
 ```
 git clone -b cikm2018 --single-branch https://github.com/approach0/search-engine 
 cd search-engine
-PROJECT = `pwd`
+PROJECT=`pwd`
 ```
 
 Install external dependencies:
@@ -60,7 +60,24 @@ you need to run the `configure` script successfully without reporting any missin
 ```
 make
 ```
-## Indexing 
+## Indexing
+Before indexing, first you need to setup a index daemon,
+```
+cd indexer
+./run/indexd.out
+```
+
+Go to a new terminal session, download the NTCIR-12 math browsing task corpus and feed it to the index daemon:
+```
+cd $PROJECT/indexer/test-corpus/ntcir12
+wget http://approach0.xyz:3838/trecfiles/corpus.txt
+mv corpus.txt ntcir12.tmp
+./ntcir-feeder.py
+```
+
+The indexing takes quite a while, we strongly suggest running on a SSD disk because our current indexer produces a lot of random writes. When indexing, `ntcir-feeder.py` script will show the progress (lines of input file processed), the script exits when indexing is finished. At this point, you will need to use `Ctrl` + `C` to terminate index daemon before searching on the fresh index. A `tmp` file is created at the directory of `indexer`, it is the generated index.
+
+## Search and generate TREC output
 
 ## License
 MIT
