@@ -5,15 +5,15 @@
 
 Approach0 is a math-aware search engine.
 
-Please visit [https://approach0.xyz/demo](https://approach0.xyz/demo) for a WEB demo (not using the new model yet).
+WEB demo: [https://approach0.xyz/demo](https://approach0.xyz/demo) (not using the new model yet).
 
 ![](https://github.com/approach0/search-engine-docs-eng/raw/master/img/clip.gif)
 
 This branch is saved for reproducing `CIKM-2018` paper results. Sections below describes how to setup,
 index and search NTCIR-12 dataset using Approach0. This branch also provides some tool scripts for generating TREC format files.
 
-Details on our evaluation results (including query-by-query results) and also the NTCIR-12 dataset (in LaTeX)
-can be viewed here:
+Details on our evaluation results (including query-by-query search result output) and also the NTCIR-12 dataset (in LaTeX)
+can be viewed or downloaded from here:
 [http://approach0.xyz:3838](http://approach0.xyz:3838)
 
 More technical documentation is available here:
@@ -61,7 +61,7 @@ you need to run the `configure` script successfully without reporting any missin
 make
 ```
 ## Indexing
-Before indexing, first you need to setup a index daemon,
+Before indexing, first you need to setup an index daemon,
 ```
 cd indexer
 ./run/indexd.out
@@ -77,7 +77,7 @@ mv corpus.txt ntcir12.tmp
 
 The indexing takes quite a while, we strongly suggest running on a SSD disk because our current indexer naively produces a lot of random writes.
 When indexing, `ntcir-feeder.py` script will show the progress (lines of input file processed), the script exits when indexing is finished.
-At this point, you will need to use `Ctrl` + `C` to terminate index daemon before searching on the fresh index. The output file `tmp` is created at the directory of `indexer`, it is the generated index.
+At this point, you will need to use `Ctrl` + `C` to terminate index daemon before searching on the fresh index. The output directory `tmp` is created at the directory of `indexer`, it is the generated index. Please delete the entire `tmp` directory everytime you need to re-index a new corpus.
 
 ## Search and generate TREC output
 Before evaluating NTCIR-12 queries, you can experiment your own query on the newly built index.
@@ -89,7 +89,7 @@ cd $PROJECT
 ```
 Each run of test-search program will append TREC format results to the log file named `trec-format-results.tmp`.
 
-Download NTCIR-12 query data and exclude wildcards queries (not supported yet):
+Download NTCIR-12 query data and exclude wildcards queries (wildcards are not yet supported in current system):
 ```
 cd $PROJECT
 wget http://approach0.xyz:3838/trecfiles/topics.txt
@@ -98,7 +98,6 @@ cat topics.txt | awk '{split($1,a,"-"); if (a[3] <= 20) print $0}' > ./topics-co
 
 Now simply run `./genn-trec-results.py` to invoke test-search program and concatenate all the TREC output for all queries.
 ```
-./genn-trec-results.py
 ./genn-trec-results.py 2> runtime.log
 ```
 The wall-clock runtime is written into `runtime.log`.
