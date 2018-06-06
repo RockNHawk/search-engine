@@ -5,39 +5,32 @@
 
 Approach0 is a math-aware search engine.
 
-Math search can be helpful in math Q&A websites: Assume you are doing a tough
-question on your math homework, you type in search box the exact question from
-your textbook, after a second (maybe too much) you get all the similar questions
-that somebody has already asked about, they are perhaps answered!
-
-## Online demo
-Please visit [https://approach0.xyz/demo](https://approach0.xyz/demo) for a WEB demo.
+Please visit [https://approach0.xyz/demo](https://approach0.xyz/demo) for a WEB demo (not using the new model yet).
 
 ![](https://github.com/approach0/search-engine-docs-eng/raw/master/img/clip.gif)
 
-## A little history
-The author has been doing a
-[math-only search engine prototype](https://github.com/t-k-/opmes)
-during his graduate research. Shortly after that prototype is implemented, this
-project is created. Its mission is to combine both math-search and fulltext search.
-Now I am happy this goal is achieved too! The next step is continuously develop
-this project and focus on improving effectiveness and efficiency.
+This branch is saved for reproducing `CIKM-2018` paper results. Sections below describes how to setup,
+index and search NTCIR-12 dataset. We also provide tool scripts for evaluation.
 
-Technically, this search engine is still based on previously existing and established
-fulltext search methods. On top of these, it adds new ideas and algorithms to handle
-structural content (see paper
-[1](https://github.com/tkhost/tkhost.github.io/raw/master/opmes/thesis-ref.pdf) and
-[2](https://github.com/tkhost/tkhost.github.io/raw/master/opmes/ecir2016.pdf))
+Details on our evaluation results (including query-by-query results) and also the NTCIR-12 dataset (in LaTeX)
+can be viewed here:
 
-For now only math-aware search is implemented, but this idea can be generally
-applied to other structural text search such as code, chemistry formula and more.
+[http://approach0.xyz:3838](http://approach0.xyz:3838)
 
-## Documentation
-Please check out our documentation for technical details:
+More technical documentation is available here:
 [https://approach0.xyz/docs](https://approach0.xyz/docs)
+
+## 
+
 
 ## License
 MIT
 
 ## Contact
 zhongwei@udel.edu
+
+Thanks for the DPRL lab for supporting my research.
+
+https://www.cs.rit.edu/~rlaz/
+
+![](https://www.cs.rit.edu/~rlaz/images/DPRL_Logo_Option_02.png)
