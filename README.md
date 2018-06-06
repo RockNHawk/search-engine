@@ -75,9 +75,54 @@ mv corpus.txt ntcir12.tmp
 ./ntcir-feeder.py
 ```
 
-The indexing takes quite a while, we strongly suggest running on a SSD disk because our current indexer produces a lot of random writes. When indexing, `ntcir-feeder.py` script will show the progress (lines of input file processed), the script exits when indexing is finished. At this point, you will need to use `Ctrl` + `C` to terminate index daemon before searching on the fresh index. A `tmp` file is created at the directory of `indexer`, it is the generated index.
+The indexing takes quite a while, we strongly suggest running on a SSD disk because our current indexer naively produces a lot of random writes.
+When indexing, `ntcir-feeder.py` script will show the progress (lines of input file processed), the script exits when indexing is finished.
+At this point, you will need to use `Ctrl` + `C` to terminate index daemon before searching on the fresh index. The output file `tmp` is created at the directory of `indexer`, it is the generated index.
 
 ## Search and generate TREC output
+Before evaluating NTCIR-12 queries, you can experiment your own query on the newly built index.
+
+A test-search program is provided for trying out some queries:
+```
+cd $PROJECT
+./search/run/test-search.out -n -i ./indexer/tmp/ -m 'a+b' -q 'test-query-ID'
+```
+Each run of test-search program will append TREC format results to the log file named `trec-format-results.tmp`.
+
+Download NTCIR-12 query data and exclude wildcards queries (not supported yet):
+```
+cd $PROJECT
+wget http://approach0.xyz:3838/trecfiles/topics.txt
+cat topics.txt | awk '{split($1,a,"-"); if (a[3] <= 20) print $0}' > ./topics-concrete.tmp
+```
+
+Now simply run `./genn-trec-results.py` to invoke test-search program and concatenate all the TREC output for all queries.
+```
+./genn-trec-results.py
+./genn-trec-results.py 2> runtime.log
+```
+The wall-clock runtime is written into `runtime.log`.
+
+## Evaluation
+Download trec-eval and build it:
+```
+git clone https://github.com/usnistgov/trec_eval
+cd trec_eval
+make
+ln -sf `pwd`/trec_eval $PROJECT
+```
+
+Download NTCIR-12 judgement data:
+```
+cd $PROJECT
+wget http://approach0.xyz:3838/trecfiles/judge.dat
+mv judge.dat NTCIR12_MathWiki-qrels_judge.dat
+```
+
+Run `eval-trec-results.sh` to evaluate `trec-format-results.tmp` file just generated:
+```
+./eval-trec-results.sh trec-format-results.tmp
+```
 
 ## License
 MIT
