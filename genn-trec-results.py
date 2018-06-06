@@ -3,12 +3,10 @@ import os
 import time
 import sys
 
-# ./search/run/test-search.out -n -i ./tmp/ -m 'a+b' -q 'NTCIR12-MathWiki-123'
+# ./search/run/test-search.out -n -i ./tmp/ -m 'a+b' -q 'test-query-ID'
 
-#fname = "indexer/test-corpus/ntcir12/topics.txt"
-fname = "indexer/test-corpus/ntcir12/topics-concrete.txt"
-index = "/home/tk/Desktop/approach0/indexer/tmp"
-# index = "/home/tk/rotate-disk/ext4/index-prefix-ntcir12-fix-bottleneck"
+fname = "./topics-concrete.tmp"
+index = "./indexer/tmp"
 output = 'trec-format-results.tmp'
 
 rmcmf = 'rm -f {}'.format(output)
