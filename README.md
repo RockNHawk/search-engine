@@ -12,13 +12,6 @@ WEB demo: [https://approach0.xyz/demo](https://approach0.xyz/demo) (not using th
 This branch is saved for reproducing results. Sections below describes how to setup,
 index and search NTCIR-12 dataset using Approach0. This branch also provides some tool scripts for generating TREC format files.
 
-Details on our evaluation results (including query-by-query search result output) and also the NTCIR-12 dataset (in LaTeX)
-can be viewed or downloaded from here:
-[http://approach0.xyz:3838](http://approach0.xyz:3838)
-
-More technical documentation is available here:
-[https://approach0.xyz/docs](https://approach0.xyz/docs)
-
 ## Build (Ubuntu system)
 Clone this branch
 ```
