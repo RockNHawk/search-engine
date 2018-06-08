@@ -9,7 +9,7 @@ WEB demo: [https://approach0.xyz/demo](https://approach0.xyz/demo) (not using th
 
 ![](https://github.com/approach0/search-engine-docs-eng/raw/master/img/clip.gif)
 
-This branch is saved for reproducing `CIKM-2018` paper results. Sections below describes how to setup,
+This branch is saved for reproducing results. Sections below describes how to setup,
 index and search NTCIR-12 dataset using Approach0. This branch also provides some tool scripts for generating TREC format files.
 
 Details on our evaluation results (including query-by-query search result output) and also the NTCIR-12 dataset (in LaTeX)
@@ -20,9 +20,9 @@ More technical documentation is available here:
 [https://approach0.xyz/docs](https://approach0.xyz/docs)
 
 ## Build (Ubuntu system)
-Clone the CIKM-2018 branch
+Clone this branch
 ```
-git clone -b cikm2018 --single-branch https://github.com/approach0/search-engine 
+git clone -b <branch_name> --single-branch https://github.com/approach0/search-engine 
 cd search-engine
 PROJECT=`pwd`
 ```
